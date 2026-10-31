@@ -1,0 +1,9 @@
+.gradle/
+.idea/*
+!.idea/externalDependencies.xml
+!.idea/ktlint-plugin.xml
+.kotlin/
+build/
+local.properties
+.DS_Store
+xcuserdata/
