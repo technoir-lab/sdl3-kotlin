@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<lint>
+    <!-- SDL's Java glue is third-party code. -->
+    <issue id="all">
+        <ignore regexp=".*/thirdparty/SDL/.*" />
+    </issue>
+</lint>

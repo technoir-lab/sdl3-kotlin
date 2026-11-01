@@ -7,12 +7,16 @@
   Kotlin/Native target and generates the bindings from the installed headers.
 - `sdl3/src/commonTest/kotlin`: tests that run against the statically linked SDL.
 - `sample/`: Kotlin Multiplatform sample application; `sample/apple/` holds the Xcode project that embeds it on iOS, macOS, and tvOS.
+  `sample/android/` is the Android application that packages its `androidNativeArm64` shared library with SDL's Java glue
+  from `thirdparty/SDL/android-project`.
 - `thirdparty/SDL`: SDL source, pinned as a shallow Git submodule to an upstream `release-*` tag.
 
 ## Build, Test, and Development Commands
 
 Run commands from the repository root after `git submodule update --init --recursive`. Use the Gradle wrapper; the daemon
 and CI use JDK 25. Building SDL requires CMake 3.29 or newer on `PATH`; Apple targets require macOS with Xcode.
+Builds that configure the Android sample, including every Make target, require an Android SDK located through
+`ANDROID_HOME` or `sdk.dir` in `local.properties`.
 
 - `make build`: build SDL and the bindings for every target the host supports, link the sample, and run checks.
 - `make check`: run standard checks; builds SDL only for targets with test tasks, skipping the Android, Apple device, and
@@ -26,6 +30,7 @@ Pass additional options with `make check GRADLE_ARGS="--info"`.
 - Run Make targets that invoke Gradle and direct `./gradlew` commands outside the filesystem sandbox so Gradle can access its cache.
 - `./gradlew :sdl3:macosArm64Test`: build SDL for one target and run its tests; replace the target as needed.
 - `./gradlew :sample:runDebugExecutable`: run the sample on a compatible desktop host.
+- `./gradlew :sample:android:installDebug`: install the sample on a connected arm64-v8a Android device or emulator.
 - CI builds on macOS 26, Ubuntu 26.04, and Windows Server 2025. Apple targets build only on macOS, so releases publish from macOS.
 
 ## SDL Configuration

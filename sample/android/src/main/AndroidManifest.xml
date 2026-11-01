@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- SDL reports the back button to the app as SDLK_AC_BACK key events, which predictive back would bypass. -->
+    <application
+        android:enableOnBackInvokedCallback="false"
+        android:label="SDL3 Sample"
+        android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
+
+        <!-- SDL handles configuration changes itself; a recreated SDLActivity exits the process. -->
+        <activity
+            android:name=".SampleActivity"
+            android:configChanges="layoutDirection|locale|grammaticalGender|fontScale|fontWeightAdjustment|orientation|uiMode|screenLayout|screenSize|smallestScreenSize|keyboard|keyboardHidden|navigation"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

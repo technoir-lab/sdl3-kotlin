@@ -8,6 +8,7 @@ pluginManagement {
     plugins {
         val conventionPluginsVersion = "v63"
         id("io.technoirlab.cmake-import") version "1.4.0"
+        id("io.technoirlab.conventions.android-application") version conventionPluginsVersion
         id("io.technoirlab.conventions.kotlin-multiplatform-application") version conventionPluginsVersion
         id("io.technoirlab.conventions.kotlin-multiplatform-library") version conventionPluginsVersion
         id("io.technoirlab.conventions.root") version conventionPluginsVersion
@@ -17,6 +18,7 @@ pluginManagement {
 
 plugins {
     id("io.technoirlab.cmake-import") apply false
+    id("io.technoirlab.conventions.android-application") apply false
     id("io.technoirlab.conventions.kotlin-multiplatform-application") apply false
     id("io.technoirlab.conventions.kotlin-multiplatform-library") apply false
     id("io.technoirlab.conventions.root") apply false
@@ -41,4 +43,5 @@ globalSettings {
 }
 
 include(":sample")
+include(":sample:android")
 include(":sdl3")
