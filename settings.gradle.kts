@@ -39,4 +39,5 @@ globalSettings {
     }
 }
 
+include(":sample")
 include(":sdl3")

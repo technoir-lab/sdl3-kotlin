@@ -6,6 +6,7 @@
   The module has no handwritten API; the `io.technoirlab.cmake-import` plugin builds SDL from source for every
   Kotlin/Native target and generates the bindings from the installed headers.
 - `sdl3/src/commonTest/kotlin`: tests that run against the statically linked SDL.
+- `sample/`: Kotlin Multiplatform sample application; `sample/apple/` holds the Xcode project that embeds it on iOS, macOS, and tvOS.
 - `thirdparty/SDL`: SDL source, pinned as a shallow Git submodule to an upstream `release-*` tag.
 
 ## Build, Test, and Development Commands
@@ -13,7 +14,7 @@
 Run commands from the repository root after `git submodule update --init --recursive`. Use the Gradle wrapper; the daemon
 and CI use JDK 25. Building SDL requires CMake 3.29 or newer on `PATH`; Apple targets require macOS with Xcode.
 
-- `make build`: build SDL and the bindings for every target the host supports and run checks.
+- `make build`: build SDL and the bindings for every target the host supports, link the sample, and run checks.
 - `make check`: run standard checks; builds SDL only for targets with test tasks, skipping the Android, Apple device, and
   `linuxArm64` targets.
 - `make test`: run multiplatform tests on available targets.
@@ -24,12 +25,13 @@ Pass additional options with `make check GRADLE_ARGS="--info"`.
 
 - Run Make targets that invoke Gradle and direct `./gradlew` commands outside the filesystem sandbox so Gradle can access its cache.
 - `./gradlew :sdl3:macosArm64Test`: build SDL for one target and run its tests; replace the target as needed.
+- `./gradlew :sample:runDebugExecutable`: run the sample on a compatible desktop host.
 - CI builds on macOS 26, Ubuntu 26.04, and Windows Server 2025. Apple targets build only on macOS, so releases publish from macOS.
 
 ## SDL Configuration
 
 - Configure SDL through `cmakeImport.defines` and the per-target `CMakeGenerateTask` overrides in `sdl3/build.gradle.kts`.
-- Keep the target list in `sdl3/build.gradle.kts` and `README.md` in sync.
+- Keep the target list in `sdl3/build.gradle.kts`, `sample/build.gradle.kts`, and `README.md` in sync.
 - To update SDL, check out the new upstream tag in the submodule and update the SDL version in `README.md` in the same change:
   `git -C thirdparty/SDL fetch --depth 1 origin tag release-X.Y.Z && git -C thirdparty/SDL checkout release-X.Y.Z`.
   Review SDL's CMake option changes against the build configuration.
