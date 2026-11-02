@@ -171,34 +171,6 @@
 					"@executable_path/../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					"-weak_framework",
-					CoreHaptics,
-				);
-				"OTHER_LDFLAGS[sdk=macosx*]" = (
-					"$(inherited)",
-					"-framework",
-					AVFoundation,
-					"-framework",
-					AudioToolbox,
-					"-framework",
-					Carbon,
-					"-framework",
-					CoreAudio,
-					"-framework",
-					ForceFeedback,
-					"-framework",
-					GameController,
-					"-framework",
-					IOKit,
-					"-framework",
-					Metal,
-					"-framework",
-					QuartzCore,
-					"-weak_framework",
-					UniformTypeIdentifiers,
-				);
 				PRODUCT_BUNDLE_IDENTIFIER = io.technoirlab.sdl3.sample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
@@ -240,34 +212,6 @@
 					"@executable_path/../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					"-weak_framework",
-					CoreHaptics,
-				);
-				"OTHER_LDFLAGS[sdk=macosx*]" = (
-					"$(inherited)",
-					"-framework",
-					AVFoundation,
-					"-framework",
-					AudioToolbox,
-					"-framework",
-					Carbon,
-					"-framework",
-					CoreAudio,
-					"-framework",
-					ForceFeedback,
-					"-framework",
-					GameController,
-					"-framework",
-					IOKit,
-					"-framework",
-					Metal,
-					"-framework",
-					QuartzCore,
-					"-weak_framework",
-					UniformTypeIdentifiers,
-				);
 				PRODUCT_BUNDLE_IDENTIFIER = io.technoirlab.sdl3.sample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
