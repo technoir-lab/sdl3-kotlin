@@ -46,7 +46,7 @@ fun main() {
     exitProcess(status)
 }
 
-private fun sdlMain(argc: Int, argv: CArrayPointer<CPointerVar<ByteVar>>?): Int {
+internal fun sdlMain(argc: Int, argv: CArrayPointer<CPointerVar<ByteVar>>?): Int {
     try {
         runSample()
     } finally {

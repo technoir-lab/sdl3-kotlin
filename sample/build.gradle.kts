@@ -1,3 +1,5 @@
+import org.gradle.language.cpp.CppBinary
+import org.jetbrains.kotlin.gradle.plugin.mpp.SharedLibrary
 import org.jetbrains.kotlin.konan.target.HostManager
 
 plugins {
@@ -9,7 +11,20 @@ kotlinMultiplatformApplication {
 }
 
 kotlin {
-    androidNativeArm64()
+    androidNativeArm64 {
+        // Expose the shared libraries to the Android application in the android directory.
+        binaries.withType<SharedLibrary>().configureEach {
+            configurations.consumable("androidNativeArm64${name.replaceFirstChar(Char::uppercaseChar)}Elements") {
+                attributes {
+                    attribute(Usage.USAGE_ATTRIBUTE, objects.named(Usage.NATIVE_RUNTIME))
+                    attribute(CppBinary.DEBUGGABLE_ATTRIBUTE, buildType.debuggable)
+                }
+                outgoing.artifact(outputFile) {
+                    builtBy(linkTaskProvider)
+                }
+            }
+        }
+    }
 
     if (HostManager.hostIsLinux) {
         linuxArm64()
