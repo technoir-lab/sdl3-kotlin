@@ -36,6 +36,7 @@ globalSettings {
         description = "SDL3 bindings for Kotlin Multiplatform."
         developer(name = "technoir", email = "technoir.dev@gmail.com")
         license(name = "The Apache Software License, Version 2.0", url = "https://www.apache.org/licenses/LICENSE-2.0.txt")
+        license(name = "zlib License", url = "https://www.zlib.net/zlib_license.html")
     }
 }
 

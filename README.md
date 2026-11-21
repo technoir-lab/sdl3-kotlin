@@ -43,3 +43,10 @@ installation. See the [sample](sample) project for a minimal application.
 * `linuxArm64` and `linuxX64`: SDL includes only its offscreen and dummy video drivers and its disk
   and dummy audio drivers because the Kotlin/Native Linux sysroot lacks X11, Wayland, and audio
   development headers.
+
+## License
+
+`sdl3-kotlin` is licensed under the [Apache License, Version 2.0](LICENSE).
+
+Published artifacts statically bundle [SDL3](https://github.com/libsdl-org/SDL), which is licensed
+under the [zlib License](https://www.zlib.net/zlib_license.html).
