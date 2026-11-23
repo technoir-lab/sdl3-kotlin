@@ -1,3 +1,6 @@
+import org.gradle.language.cpp.CppBinary
+import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
+import org.jetbrains.kotlin.gradle.plugin.mpp.SharedLibrary
 import org.jetbrains.kotlin.konan.target.HostManager
 
 plugins {
@@ -9,7 +12,10 @@ kotlinMultiplatformApplication {
 }
 
 kotlin {
-    androidNativeArm64()
+    androidNativeArm64 {
+        // Expose the shared libraries to the Android application in the android directory.
+        exposeSharedLibraries()
+    }
 
     if (HostManager.hostIsLinux) {
         linuxArm64()
@@ -33,6 +39,24 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             implementation(project(":sdl3"))
+        }
+    }
+}
+
+/**
+ * Exposes each shared library of this target in its own consumable configuration,
+ * which consumers select by native runtime usage and debuggability.
+ */
+private fun KotlinNativeTarget.exposeSharedLibraries() {
+    binaries.withType<SharedLibrary>().configureEach {
+        configurations.consumable("$targetName${name.replaceFirstChar(Char::uppercaseChar)}Elements") {
+            attributes {
+                attribute(Usage.USAGE_ATTRIBUTE, objects.named(Usage.NATIVE_RUNTIME))
+                attribute(CppBinary.DEBUGGABLE_ATTRIBUTE, buildType.debuggable)
+            }
+            outgoing.artifact(outputFile) {
+                builtBy(linkTaskProvider)
+            }
         }
     }
 }
